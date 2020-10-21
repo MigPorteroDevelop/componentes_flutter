@@ -45,6 +45,7 @@ flutter:
   uses-material-design: true
 
   # To add assets to your application, add an assets section, like this:
+  # agregamos la ruta del archivo json para tenerlo disponible para la app
   assets:
     - data/menu_opt.json
   #   - images/a_dot_ham.jpeg
