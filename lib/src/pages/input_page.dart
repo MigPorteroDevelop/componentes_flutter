@@ -11,6 +11,9 @@ class _InputPageState extends State<InputPage> {
   String _nombre = '';
   String _email = '';
   String _fecha = '';
+  String _seleccion = 'Carisma';
+
+  List<String> _caracteristicas = ['Carisma', 'Empatía', 'Fiable', 'Leal'];
 
   TextEditingController _inputFieldDateController = new TextEditingController();
 
@@ -30,6 +33,8 @@ class _InputPageState extends State<InputPage> {
           _crearPassword(),
           Divider(),
           _crearFecha(context),
+          Divider(),
+          _crearDropdown(),
           Divider(),
           _crearPersona()
         ],
@@ -143,10 +148,49 @@ class _InputPageState extends State<InputPage> {
     }
   }
 
+  //Creamos una lista de elementos que va a manejar un string.
+  List<DropdownMenuItem<String>> getOpcionesDropdown() {
+    //Retornamos la lista.
+    List<DropdownMenuItem<String>> lista = new List();
+
+    //Agregamos los elementos a la lista.
+    _caracteristicas.forEach((caracteristica) {
+      //Cogemos la lista creada y añadimos la caracteristica, los agregamos
+      //con DropdownMenuItem.
+      lista.add(DropdownMenuItem(
+        child: Text(caracteristica),
+        value: caracteristica,
+      ));
+    });
+
+    return lista;
+  }
+
+  _crearDropdown() {
+    return Row(
+      children: [
+        Icon(Icons.select_all),
+        SizedBox(width: 30.0),
+        Expanded(
+          child: DropdownButton(
+            value: _seleccion,
+            items: getOpcionesDropdown(),
+            onChanged: (opt) {
+              setState(() {
+                _seleccion = opt;
+              });
+            },
+          ),
+        )
+      ],
+    );
+  }
+
   _crearPersona() {
     return ListTile(
       title: Text('El nombre es :$_nombre'),
       subtitle: Text('El email es :$_email'),
+      trailing: Text(_seleccion),
     );
   }
 }
