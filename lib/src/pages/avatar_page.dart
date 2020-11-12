@@ -1,6 +1,9 @@
 import 'package:flutter/material.dart';
 
 class AvatarPage extends StatelessWidget {
+  //Creamos una propiedad estática para la ruta.
+  static final pageName = 'avatar';
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
